@@ -10,10 +10,21 @@
 # 流程
 - addTodo -> return todo -> addItem -> 渲染 DOM
 
-# 例子
+# 🌟利用 Promise 回掉, 避免直接操作到 DOM 的例子
 function TodoList() {
-	Promise -> addTodo(todo) -> reslove(todo) -> then todo -> addItem(todo)
+	Promise 
+		-> addTodo(todo) 
+			-> reslove(todo) 
+				-> then todo 
+					-> addItem(todo)
 
+	addItem(todo) {
+		// 渲染 DOM
+	}
+}
+
+# 🌟直接操作到 DOM 的例子 （不推荐）
+function TodoList() {
 	addItem(todo) {
 		// 渲染 DOM
 	}
