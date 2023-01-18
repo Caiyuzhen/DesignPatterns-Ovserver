@@ -40,8 +40,14 @@ class TodoDOM {
 		return new Promise((res, rej) => { 
 			const OItems: HTMLCollection = document.getElementsByClassName('todo-item')
 
+			Array.from(OItems).forEach(oItem => {
+				const _id = parseInt(oItem.querySelector('button').dataset.id) //找到 button 身上绑定的 id
 			
-
+				if(_id === id) {
+					oItem.remove()//删除当前惦记的 list item
+					resolve()
+				}	
+			})
 		})
 	}
 
@@ -50,7 +56,18 @@ class TodoDOM {
 	// 修改 todo DOM
 	public toggleItem(id: number): Promise<void> { //是一个 Promise 类型, 因为只是操作 DOM, 所以没有具体的返回值类型
 		return new Promise((res, rej) => {
+			const OItems: HTMLCollection = document.getElementsByClassName('todo-item')
+
+			Array.from(OItems).forEach(oItem => {
+				const oCheckbox: HTMLInputElement = oItem.querySelector('input')
+				const _id = parseInt(oCheckbox.dataset.id) //找到 input 上绑定的 id
 			
+				if(_id === id) {
+					const oConetnt: HTMLElement = oItem.querySelector('span')
+					oConetnt.style.textDecoration = oCheckbox.checked ? 'line-through' : 'none' //判断是否完成, 然后根据对应的状态来给不同的 class
+					resolve()
+				}	
+			})
 		})
 	}
 
