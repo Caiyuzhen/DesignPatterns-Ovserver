@@ -17,7 +17,7 @@ class TodoEvent {
 	}
 
 
-	// 添加数据
+	// 添加 itdm 数据
 	public addTodo (todo: ITodo): Promise<ITodo> {//⚡️看 resolve 出来什么, 就是什么类型
 		return new Promise((res, rej) => { // resolve 成功, reject 失败, 用来处理 Promise 异步操作的回调！
 			// 看一下原有的 todo 是否存在? 避免重复创建
