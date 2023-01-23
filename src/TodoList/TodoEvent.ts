@@ -17,7 +17,7 @@ class TodoEvent {
 	}
 
 
-	// 添加 itdm 数据
+	// 添加 item 数据
 	public addTodo (todo: ITodo): Promise<ITodo> {//⚡️看 resolve 出来什么, 就是什么类型
 		return new Promise((res, rej) => { // resolve 成功, reject 失败, 用来处理 Promise 异步操作的回调！
 			// 看一下原有的 todo 是否存在? 避免重复创建
@@ -32,6 +32,9 @@ class TodoEvent {
 			// 修改数据
 			this.todoData.push(todo)
 
+			//🔵打印一下 todoDat （所有 todo 列表的数据）
+			// console.log(this.todoData)
+
 			// 返回回调
 			res(todo)
 		}) 
@@ -40,9 +43,13 @@ class TodoEvent {
 
 	// 删除数据
 	public removeTodo (id: number): Promise<number> {
+		console.log('删除中');
 		return new Promise((res, rej) => {
 			//过滤掉一些数据, 要返回的是不等于当前被拿到 id 的数据
 			this.todoData = this.todoData.filter(t => t.id !== id) 
+
+			//🔵打印一下 todoDat （所有 todo 列表的数据）
+			console.log(this.todoData)
 
 			// 返回回调的值
 			res(id)
@@ -60,6 +67,9 @@ class TodoEvent {
 					t.completed = !t.completed
 					res(id)
 				}
+
+				//🔵打印一下 todoDat （所有 todo 列表的数据）
+				console.log(this.todoData)
 
 				// 返回回调的数据
 				return t 

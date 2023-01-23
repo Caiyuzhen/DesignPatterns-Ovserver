@@ -1,7 +1,7 @@
 import { ITodo } from "./Type"
 
 // 🌲🌲🌲 View 层
-// 操作 DOM (如果是传入 target 的操作就比较简单, 直接拿 DOM 的操作就复杂一些)
+// 操作 DOM, 构建视图 (如果是传入 target 的操作就比较简单, 直接拿 DOM 的操作就复杂一些)
 class TodoDOM {
 
 	private static instance: TodoDOM //单独的实例
@@ -30,6 +30,7 @@ class TodoDOM {
 			OItem.className = 'todo-item' //给 div 添加一个类名
 			OItem.innerHTML = this.todoView(todo) //【把模板字符串的内容嵌入到 每条todo-item 内，相当于把模板包括进去了】创建一个 div, 把 todoList 的模板插入到 div 中
 			this.OtodoList.appendChild(OItem) //把 div 添加到 OtodoList 中实例中
+			res()
 		})
 	}
 
@@ -37,13 +38,15 @@ class TodoDOM {
 
 	// 删除 todo DOM (判断传入的 id 是否是当前 item 上 button 绑定的那个 id，是的话就益处掉这条 item)
 	public removeItem(id: number): Promise<void> { //是一个 Promise 类型, 因为只是操作 DOM, 所以没有具体的返回值类型
+		console.log('删除中');
 		return new Promise((res, rej) => { 
 			const OItems: HTMLCollection = document.getElementsByClassName('todo-item')
-
+			// console.log('开始删除');
 			Array.from(OItems).forEach(oItem => {
 				// 判读对象不为空
 				const _dom_id = oItem.querySelector('button')!.dataset.id as string//找到 button 身上绑定的 id
 				const _id = parseInt(_dom_id)
+				console.log(_id, id);
 			
 				if(_id === id) {
 					oItem.remove()//删除当前惦记的 list item
@@ -57,6 +60,7 @@ class TodoDOM {
 
 	// 修改 todo DOM
 	public toggleItem(id: number): Promise<void> { //是一个 Promise 类型, 因为只是操作 DOM, 所以没有具体的返回值类型
+		console.log('修改中');
 		return new Promise((res, rej) => {
 			const OItems: HTMLCollection = document.getElementsByClassName('todo-item')
 
