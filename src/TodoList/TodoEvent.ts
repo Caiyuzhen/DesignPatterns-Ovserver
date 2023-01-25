@@ -12,7 +12,6 @@ class TodoEvent {
 		if(!TodoEvent.instance)	{
 			TodoEvent.instance = new TodoEvent()
 		}
-
 		return TodoEvent.instance
 	}
 
@@ -28,7 +27,6 @@ class TodoEvent {
 				rej('Todo 已经存在')
 				return rej(1001) //错误码
 			}
-
 			// 修改数据
 			this.todoData.push(todo)
 
@@ -43,14 +41,13 @@ class TodoEvent {
 
 	// 删除数据
 	public removeTodo (id: number): Promise<number> {
-		console.log('删除中');
+		console.log(this.todoData);
+		console.log('删除 Data 中');
 		return new Promise((res, rej) => {
 			//过滤掉一些数据, 要返回的是不等于当前被拿到 id 的数据
 			this.todoData = this.todoData.filter(t => t.id !== id) 
-
 			//🔵打印一下 todoDat （所有 todo 列表的数据）
 			console.log(this.todoData)
-
 			// 返回回调的值
 			res(id)
 		})
@@ -67,10 +64,8 @@ class TodoEvent {
 					t.completed = !t.completed
 					res(id)
 				}
-
 				//🔵打印一下 todoDat （所有 todo 列表的数据）
 				console.log(this.todoData)
-
 				// 返回回调的数据
 				return t 
 			})

@@ -38,15 +38,16 @@ class TodoDOM {
 
 	// 删除 todo DOM (判断传入的 id 是否是当前 item 上 button 绑定的那个 id，是的话就益处掉这条 item)
 	public removeItem(id: number): Promise<void> { //是一个 Promise 类型, 因为只是操作 DOM, 所以没有具体的返回值类型
-		console.log('删除中');
+		console.log('删除 DOM 中');
 		return new Promise((res, rej) => { 
 			const OItems: HTMLCollection = document.getElementsByClassName('todo-item')
 			// console.log('开始删除');
 			Array.from(OItems).forEach(oItem => {
+				const _id = parseInt(oItem.querySelector('button')!.dataset.id!)!
 				// 判读对象不为空
-				const _dom_id = oItem.querySelector('button')!.dataset.id as string//找到 button 身上绑定的 id
-				const _id = parseInt(_dom_id)
-				console.log(_id, id);
+				// const _dom_id = oItem.querySelector('button')!.dataset.id as string//找到 button 身上绑定的 id
+				// const _id = parseInt(_dom_id)
+				// console.log(_id, id);
 			
 				if(_id === id) {
 					oItem.remove()//删除当前惦记的 list item
@@ -86,7 +87,7 @@ class TodoDOM {
 		return `
 			<input type="checkbox" ${ completed ? 'checked' : ''} data-id="${ id }"/>
 			<span style="text-decoration: ${ completed ? 'line-through' : 'none' }"> ${ content } </span>
-			<button>删除</button>
+			<button data-id="${ id }">删除</button>
 		`
 	}
 }

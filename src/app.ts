@@ -60,13 +60,15 @@ import { ITodo } from './TodoList/Type'
 
 		if(tagName === 'input' || tagName === 'button') {
 			const id: number = parseInt((tar.dataset.id) as string)
+			// console.log(id);
+
 			switch (tagName) {
 				case 'input':
-					console.log('111');
 					todoList.notify<number>('toggle', id)
 					break
 				case 'button':
 					todoList.notify<number>('remove', id)
+					console.log(id, '删除这项')  //传入的 id 不对, 有 bug 
 					break
 				default:
 					break

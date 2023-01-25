@@ -74,7 +74,7 @@ class TodoList {
 
 	/* 🔥🔥用来触发上边糅合后的事件!!在 app.ts 里边来添加事件监听器, 然后调用 notify 这个方法！
 	   分别去执行 addHandlers 、removeHandlers 、toggleHandlers 数组容器内的方法 
-	   👉 <T> 范型表示在调用的时候再去传入它的类型!! 比如在 app.ts 内调用 notify 然后再去传入类型, 此时 <T> 就是 <ITodo> 类型！！
+	   👉 <T> 🔥范型表示在调用的时候再去传入它的类型!! 比如在 app.ts 内调用 notify 然后再去传入类型, 此时 <T> 就是 <ITodo> 类型！！
 	   */
 	public notify<T> (type: string, param: T) {//type: string 为枚举值: add、remove、toggle, 还要传入参数 params, 根据参数类型来判断范型的类型
 		// 因为
@@ -97,7 +97,7 @@ class TodoList {
 		}
 		
 
-		//🔥拿到（糅合后数组内的）返回值, 相当于先执行 handlers[0], 传入 param 参数
+		//🔥拿到（糅合后数组内的）返回值, 相当于先执行 handlers[0], 传入 param 参数, 让变量变成一个 Promise 对象!
 		res = handlers[i](param) //res 是一个 Promise 对象！
 
 		while (i < handlers.length - 1) {//数组有多少个方法, 就遍历几次 i
